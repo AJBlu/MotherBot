@@ -1,0 +1,16 @@
+```
+
+CURRENT COMMANDS:
+
+    - !roll -> rolls d100
+    - !roll adv -> rolls a d100 twice and selects the lowest result
+    - !roll dis -> rolls a d100 twice and selects the highest result
+    - !roll adv/dis [TARGET NUMBER] -> rolls a d100, with advantage or disadvantage if needed, comparing it with a target number
+    - !panic [CURRENT STRESS] [RESOLVE] -> roll on panic table, sending result given your current stress and resolve
+    - !stress [CURRENT STRESS] [RESOLVE] -> roll on stress table, automatically rolls on panic table if you fail the stress roll
+    - !help -> opens help menu
+    - !scum -> rolls a random scum with a motivation from Mothership RAW
+    - !motiv -> rolls an NPC motivation
+
+
+ ```

@@ -1,6 +1,6 @@
 import random
 from random import choice, randint
-
+import csv
 
 def get_response(user_input: str) -> str:
     lowered: str = user_input.lower()
@@ -38,7 +38,7 @@ def get_response(user_input: str) -> str:
                         int(tokens[1])) + '```')
 
         if tokens[0] == "help":
-            return 'help not implemented'
+            return open("text/help", "r").read()
         if tokens[0] == "stress":
             stress_roll = roll_dice(2, 20)
             stress_result = ""
@@ -128,6 +128,8 @@ def get_response(user_input: str) -> str:
                     scum_notes + "\n" + "Motivations:" + "\n" + scum_motivations + "```")
         if tokens[0] == "motiv":
             return "```" + "\n" + "Motivation:" + "\n" + crew_motiv() + "```"
+        if tokens[0] == "trinket":
+            return get_trinket()
 
 def crew_motiv() -> str:
     sector_roll = roll_dice(0,99)
@@ -198,6 +200,7 @@ def crew_motiv() -> str:
         if motiv_roll == 10:
             return "They are secretly a Bounty Hunter looking for you"
 
+
 def roll_dice(a: int,
               b: int) -> int:
     random.seed(random.SystemRandom().random())
@@ -212,6 +215,16 @@ def skill_check(dice: int,
     if dice > target:
         result = result + "Failure!"
     return result
+
+
+def get_trinket() -> str:
+    r = roll_dice(0,99)
+    d = {}
+    with open('text/items.csv', mode='r') as infile:
+        reader = csv.reader(infile)
+        d = {rows[0]:rows[1] for rows in reader}
+
+    return d[str(r)]
 
 
 def check_stress(stress_roll: int,
