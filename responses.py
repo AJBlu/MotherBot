@@ -46,7 +46,157 @@ def get_response(user_input: str) -> str:
                 if tokens[1].isdigit():
                     stress_result = check_stress(stress_roll, int(tokens[1]), int(tokens[2]))
             return "```" + f"You rolled {stress_roll}\n" + "\n" + stress_result + "```"
+        if tokens[0] == "scum":
+            scum_roll = roll_dice(1,10)
+            scum_name = ""
+            scum_description = ""
+            scum_notes = ""
+            scum_motivations = crew_motiv()
+            if scum_roll == 1:
+                scum_name = "Whiskey Tango Ronin"
+                scum_description = ("Domestic Violence, outstanding warrants, Fealty To One’s Lord, Honorable Combat, "
+                                    "only obeys master, refuses stealthy solutions.")
+                scum_notes = ("Loadout:\n Katana, Hagakure. Demand for One Year’s Pay from Their New Master "
+                              "(non-negotiable, paid in spring).")
+            elif scum_roll == 2:
+                scum_name = "The Witness"
+                scum_description = (" Exceedingly polite, courteous and dressed in crisp and clean clothing. Will "
+                                    "explain their religion and  witness to you at any point you may be susceptible to"
+                                    " conversion—we all know there are no atheists in foxholes—will happily torture"
+                                    " and/or murder those who disparage their god.")
+                scum_notes = ("Loadout:\n Religious Text, Immaculate Clothes, Pamphlets about Their Religion, "
+                              "Missionary Zeal.")
+            elif scum_roll == 3:
+                scum_name = "The Sex Bot (Android)"
+                scum_description = ("Some genius thought the logic chip on an Android attuned to game theory and human "
+                                    "sexuality would be an unbeatable prostitute—their rote behavior and uncanny valley"
+                                    " state were a turn off. Because of this they are hypersexual at all times, "
+                                    "inappropriately frank about your appearance, "
+                                    "lack any scientific knowledge and cannot handle weapons.")
+                scum_notes = "Loadout:\n Lube, amyl nitrates, many sex manuals, tear away clothes, shady sunglasses."
+            elif scum_roll == 4:
+                scum_name = "The Wretch"
+                scum_description = ("Self-pitying, ratfucked, miserable and talkative; they lack any awareness of how "
+                                    "depressing they are and how much they stress everyone out.")
+                scum_notes = ("Mechanical:\n Stress gains are doubled when the Wretch is around (they blurt out the "
+                              "worst possible outcome and denigrate all solutions).")
+            elif scum_roll == 5:
+                scum_name = "The Preening Pseudo-Intellectual"
+                scum_description = ("You have met their kind on every habitable planet, you will most likely encounter"
+                                    " them in hell. This ignoramus seamlessly integrates a complete lack of self"
+                                    " awareness and tact with a total paucity of knowledge. This results in tantrums,"
+                                    " evasions, compulsive lying and attempts to micromanage others.")
+                scum_notes = ("Mechanical:\n Intellect Saves have Disadvantage when the Preening Pseudo-Intellectual "
+                              "is around (they argue in bad faith, making it difficult to accomplish anything).")
+            elif scum_roll == 6:
+                scum_name = "The Dude"
+                scum_description = ("Lackadaisical, lax, indifferent, just wants to minimize work and half "
+                                    "asses any task.")
+                scum_notes = "Loadout:\n Tattered bathrobe, poorly maintained gear, drugs to cope with working."
+            elif scum_roll == 7:
+                scum_name = "The Rich Kid"
+                scum_description = ("Feels stifled by the upper echelons of society and wishes for the authentic "
+                                    "experiences of the poor. Is in a contest to be the “most poor,” performing as "
+                                    "an isolated rich child would assume; wishes for the crew to go without luxuries "
+                                    "or reserves; prides themself on using only scavenged, poorly maintained gear.")
+                scum_notes = (" Mechanical:\n Their family will not financially help vagabonds; they will put out a"
+                              " bounty on every member of the crew should their unwanted child die, simply to keep up "
+                              "appearances.")
+            elif scum_roll == 8:
+                scum_name = "The Hitchhiker"
+                scum_description = ("Only in it for the free ride, the Hitchhiker will abandon your crew as soon as it "
+                                    "is most convenient for them, possibly making off with whatever isn’t tied down.")
+                scum_notes = "Loadout:\n Towel, eReader, electronic toolkit."
+            elif scum_roll == 9:
+                scum_name = "The Moon Child"
+                scum_description = ("Blessedly ignorant, into crystal healing, against medicine, wants to vibe with "
+                                    "you, does not comprehend hygiene. Will replace your gear with “natural” solutions"
+                                    ".")
+                scum_notes = ("Loadout:\n Interesting twigs and rocks, some sort of fruit jerky, a book on non-violent"
+                              " communication to be angrily foisted on your crew.")
+            elif scum_roll == 10:
+                scum_name = "The Sole Survivor"
+                scum_description = ("Grizzled, seemingly immortal, a crew member of ill omen. They are the last to"
+                                    " survive because they will cut down, abandon or sell out their companions to "
+                                    "take the full share of the loot and minimize risk. Tells gruesome, stressful "
+                                    "stories about the passing of previous compatriots distorted to minimize their "
+                                    "responsibility.")
+                scum_notes = ("Mechanical:\n During combat, when determining turn order, randomly give one member "
+                              "of the crew Disadvantage on their Speed Checks for the entire Combat. The "
+                              "Sole Survivor, however, always acts with those who succeeded.")
+            return ("```" + "\n" + "Alias:" + "\n" + scum_name + "\n" + "Description: \n" + scum_description + "\n" +
+                    scum_notes + "\n" + "Motivations:" + "\n" + scum_motivations + "```")
+        if tokens[0] == "motiv":
+            return "```" + "\n" + "Motivation:" + "\n" + crew_motiv() + "```"
 
+def crew_motiv() -> str:
+    sector_roll = roll_dice(0,99)
+    motiv_roll = roll_dice(1,10)
+
+    if sector_roll in range(0, 49):
+        if motiv_roll == 1:
+            return "Need to pay off a Crime Syndicate"
+        if motiv_roll == 2:
+            return "Need to pay off a Repossession agent"
+        if motiv_roll == 3:
+            return "Need to pay off advance from another Captain"
+        if motiv_roll == 4:
+            return "Need to pay off a Separatist Militia"
+        if motiv_roll == 5:
+            return "Need to pay off their Unpaid Taxes"
+        if motiv_roll == 6:
+            return "Need to pay off jumped Bail/Court fine"
+        if motiv_roll == 7:
+            return "Need to pay off a Pawn Shop"
+        if motiv_roll == 8:
+            return "Need to pay off a Brothel"
+        if motiv_roll == 9:
+            return "Need to pay off a Loan Shark / Payday Loan"
+        if motiv_roll == 10:
+            return "Need to pay off losing everything to a Ponzi Scheme"
+    elif sector_roll in range(50, 80):
+        if motiv_roll == 1:
+            return "They are hunting down a former partner"
+        if motiv_roll == 2:
+            return "They are hunting down a bounty hunter"
+        if motiv_roll == 3:
+            return "They are hunting down a petty official"
+        if motiv_roll == 4:
+            return "They are hunting down a mining magnate"
+        if motiv_roll == 5:
+            return "They are hunting down a military commander"
+        if motiv_roll == 6:
+            return "They are hunting down a parent"
+        if motiv_roll == 7:
+            return "They are hunting down a loan shark"
+        if motiv_roll == 8:
+            return "They are hunting down a snitch"
+        if motiv_roll == 9:
+            return "They are hunting down their sibling"
+        if motiv_roll == 10:
+            return "They are hunting down an opulently wealthy Scion"
+    elif sector_roll in range(81, 99):
+        if motiv_roll == 1:
+            return "They are secretly part of a cult (Aberrant, Secretive)"
+        if motiv_roll == 2:
+            return "They are secretly a spy (Corporate, Rival Crew, Government)"
+        if motiv_roll == 3:
+            return "They are secretly a Smuggler (Extremely Illegal Goods)"
+        if motiv_roll == 4:
+            return "They are secretly a Saboteur/Wrecker (Opportunistic)"
+        if motiv_roll == 5:
+            return "They are undercover Secret Police (Investigating Party)"
+        if motiv_roll == 6:
+            return "They are secretly Infected (Seeks to Spread)"
+        if motiv_roll == 7:
+            return ("They are secretly a Recruiter (Evaluating Ship on Behalf of Criminal Syndicate, "
+                    "Corporate Concern, Cult, etc.)")
+        if motiv_roll == 8:
+            return "They are secretly a Con Artist"
+        if motiv_roll == 9:
+            return "They are secretly a Serial Killer hiding from the law"
+        if motiv_roll == 10:
+            return "They are secretly a Bounty Hunter looking for you"
 
 def roll_dice(a: int,
               b: int) -> int:
